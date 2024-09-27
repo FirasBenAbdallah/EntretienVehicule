@@ -1,6 +1,6 @@
 <?php
-include '../config/db_connect.php';
-include '../functions/AddChauffeurProfile.php';
+include '../../config/db_connect.php';
+include '../../functions/chauffeurs/AddChauffeurProfile.php';
 
 header('Content-Type: application/json');
 

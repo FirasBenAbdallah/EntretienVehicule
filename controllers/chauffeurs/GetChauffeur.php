@@ -1,7 +1,7 @@
 <?php
-include '../config/db_connect.php';
-include '../models/Chauffeur.php';
-include '../functions/getChauffeurProfile.php';
+include '../../config/db_connect.php';
+include '../../models/Chauffeur.php';
+include '../../functions/chauffeurs/getChauffeurProfile.php';
 
 header('Content-Type: application/json');
 

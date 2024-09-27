@@ -1,6 +1,6 @@
 <?php
-include '../config/db_connect.php';
-include '../functions/AddSuivisQuotidiens.php';
+include '../../config/db_connect.php';
+include '../../functions/suivisQuotidiens/AddSuivisQuotidiens.php';
 
 header('Content-Type: application/json');
 

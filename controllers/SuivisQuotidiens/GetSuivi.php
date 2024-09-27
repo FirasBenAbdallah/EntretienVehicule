@@ -1,7 +1,7 @@
 <?php
-include '../config/db_connect.php';
-include '../models/SuivisQuotidiens.php';
-include '../functions/getSuivisQuotidiens.php';
+include '../../config/db_connect.php';
+include '../../models/SuivisQuotidiens.php';
+include '../../functions/suivisQuotidiens/getSuivisQuotidiens.php';
 
 header('Content-Type: application/json');
 

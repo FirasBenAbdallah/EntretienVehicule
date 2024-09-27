@@ -1,7 +1,6 @@
 <?php
-// Include necessary files
-include '../config/db_connect.php';  // Database connection
-include '../functions/createVehiculeInfo.php';  // Function to create vehicle
+include '../../config/db_connect.php';
+include '../../functions/vehicule/createVehiculeInfo.php';
 
 header('Content-Type: application/json');
 
