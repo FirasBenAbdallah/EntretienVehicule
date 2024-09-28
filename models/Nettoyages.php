@@ -2,8 +2,6 @@
 class Nettoyages
 {
     public $NettoyageID;
-    // public $VehiculeID;
-    // public $ChauffeurID;
     public $DateNettoyage;
     public $PhotoAvant;
     public $PhotoApres;
