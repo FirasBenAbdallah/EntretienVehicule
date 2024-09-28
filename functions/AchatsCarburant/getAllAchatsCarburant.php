@@ -1,28 +1,28 @@
 <?php
-function getAllSuivisQuotidiens()
+function getAllAchatsCarburant()
 {
     global $pdo;
 
     try {
         $stmt = $pdo->prepare("
-            SELECT s.*, v.*, c.*
-            FROM suivisquotidiens s
-            JOIN vehicule v ON s.VehiculeID = v.VehiculeID
-            JOIN chauffeurs c ON s.ChauffeurID = c.ChauffeurID
-            ORDER BY s.SuiviID
+            SELECT a.*, v.*, c.*
+            FROM achatscarburant a
+            JOIN vehicule v ON a.VehiculeID = v.VehiculeID
+            JOIN chauffeurs c ON a.ChauffeurID = c.ChauffeurID
+            ORDER BY a.AchatID
         ");
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($rows) {
-            $suivisList = [];
+            $achatsList = [];
             foreach ($rows as $row) {
-                $suivi = new SuivisQuotidiens(
-                    $row['SuiviID'],
-                    $row['DateSuivi'],
-                    $row['Kilometrage'],
-                    $row['VolumeCarburant'],
-                    $row['Preuve'],
+                $achat = new AchatsCarburant(
+                    $row['AchatID'],
+                    $row['DateAchat'],
+                    $row['Montant'],
+                    $row['Litres'],
+                    $row['Facture'],
                     [
                         'Immatriculation' => $row['Immatriculation'],
                         'Marque' => $row['Marque'],
@@ -36,11 +36,11 @@ function getAllSuivisQuotidiens()
                         'DateEmbauche' => $row['DateEmbauche']
                     ]
                 );
-                $suivisList[] = $suivi;
+                $achatsList[] = $achat;
             }
-            return json_encode($suivisList);
+            return json_encode($achatsList);
         } else {
-            return json_encode(['error' => 'No records found']);
+            return json_encode(['error' => 'No fuel purchases found']);
         }
     } catch (Exception $e) {
         return json_encode(['error' => 'Query failed: ' . $e->getMessage()]);

@@ -10,6 +10,7 @@ function getAllNettoyages()
             FROM nettoyages n
             JOIN vehicule v ON n.VehiculeID = v.VehiculeID
             JOIN chauffeurs c ON n.ChauffeurID = c.ChauffeurID
+            ORDER BY n.NettoyageID 
         ");
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
