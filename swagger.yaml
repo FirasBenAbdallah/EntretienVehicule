@@ -1,0 +1,264 @@
+openapi: "3.0.0"
+info:
+  title: "Vehicle Maintenance API"
+  version: "1.0.0"
+  description: "API documentation for managing vehicle maintenance operations, including Suivi Quotidien, Nettoyage, and Fuel Purchases."
+
+servers:
+  - url: "http://localhost:8000"
+
+paths:
+  /controllers/SuivisQuotidiens/CreateSuivi.php:
+    post:
+      summary: "Create a new Suivi Quotidien"
+      tags:
+        - "SuivisQuotidiens"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                VehiculeID:
+                  type: integer
+                  description: "ID of the vehicle"
+                ChauffeurID:
+                  type: integer
+                  description: "ID of the chauffeur"
+                DateSuivi:
+                  type: string
+                  format: date
+                  description: "Date of the suivi"
+                Kilometrage:
+                  type: integer
+                  description: "Kilometrage of the vehicle"
+                VolumeCarburant:
+                  type: number
+                  format: float
+                  description: "Volume of carburant in liters"
+                Preuve:
+                  type: string
+                  format: binary
+                  description: "Proof document image"
+      responses:
+        "200":
+          description: "SuiviQuotidien added successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    example: "SuiviQuotidien added successfully"
+        "400":
+          description: "Invalid request or missing parameters"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Missing required parameters"
+
+  /controllers/nettoyages/CreateNettoyage.php:
+    post:
+      summary: "Create a new Nettoyage"
+      tags:
+        - "Nettoyages"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                VehiculeID:
+                  type: integer
+                  description: "ID of the vehicle"
+                ChauffeurID:
+                  type: integer
+                  description: "ID of the chauffeur"
+                DateNettoyage:
+                  type: string
+                  format: date
+                  description: "Date of the cleaning"
+                PhotoAvant:
+                  type: string
+                  format: binary
+                  description: "Photo before cleaning"
+                PhotoApres:
+                  type: string
+                  format: binary
+                  description: "Photo after cleaning"
+      responses:
+        "200":
+          description: "Nettoyage added successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    example: "Nettoyage added successfully"
+        "400":
+          description: "Invalid request or missing parameters"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Missing required parameters"
+
+  /controllers/vehicule/DeleteVehicule.php:
+    delete:
+      summary: "Delete a specific vehicle"
+      tags:
+        - "Vehicles"
+      parameters:
+        - in: query
+          name: VehiculeID
+          required: true
+          schema:
+            type: integer
+          description: "ID of the vehicle to delete"
+      responses:
+        "200":
+          description: "Vehicle deleted successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    example: "Vehicle deleted successfully"
+        "404":
+          description: "Vehicle not found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Vehicle not found"
+
+  /controllers/nettoyages/GetAllNettoyages.php:
+    get:
+      summary: "Retrieve all cleaning records"
+      tags:
+        - "Nettoyages"
+      responses:
+        "200":
+          description: "A list of all nettoyages"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    NettoyageID:
+                      type: integer
+                      description: "ID of the nettoyage"
+                    VehiculeID:
+                      type: integer
+                      description: "ID of the vehicle"
+                    ChauffeurID:
+                      type: integer
+                      description: "ID of the chauffeur"
+                    DateNettoyage:
+                      type: string
+                      format: date
+                      description: "Date of the cleaning"
+                    PhotoAvant:
+                      type: string
+                      description: "URL of the photo before cleaning"
+                    PhotoApres:
+                      type: string
+                      description: "URL of the photo after cleaning"
+
+  /controllers/achatsCarburant/GetAchatCarburant.php:
+    get:
+      summary: "Retrieve a specific fuel purchase"
+      tags:
+        - "AchatsCarburant"
+      parameters:
+        - in: query
+          name: AchatID
+          required: true
+          schema:
+            type: integer
+          description: "ID of the fuel purchase"
+      responses:
+        "200":
+          description: "Fuel purchase details"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  AchatID:
+                    type: integer
+                    description: "ID of the fuel purchase"
+                  VehiculeID:
+                    type: integer
+                    description: "ID of the vehicle"
+                  ChauffeurID:
+                    type: integer
+                    description: "ID of the chauffeur"
+                  DateAchat:
+                    type: string
+                    format: date
+                    description: "Date of the fuel purchase"
+                  Montant:
+                    type: number
+                    format: float
+                    description: "Amount of the fuel purchase"
+                  Litres:
+                    type: number
+                    format: float
+                    description: "Liters purchased"
+                  Facture:
+                    type: string
+                    description: "URL of the invoice"
+
+  /controllers/achatsCarburant/DeleteAchatCarburant.php:
+    delete:
+      summary: "Delete a specific fuel purchase"
+      tags:
+        - "AchatsCarburant"
+      parameters:
+        - in: query
+          name: AchatID
+          required: true
+          schema:
+            type: integer
+          description: "ID of the fuel purchase to delete"
+      responses:
+        "200":
+          description: "Fuel purchase deleted successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    example: "Fuel purchase deleted successfully"
+        "404":
+          description: "Fuel purchase not found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Fuel purchase not found"

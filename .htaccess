@@ -1,0 +1,2 @@
+# Redirect to Swagger UI if the base URL is accessed
+DirectoryIndex /swagger-ui/dist/index.html
