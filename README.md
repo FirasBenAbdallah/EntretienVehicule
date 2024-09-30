@@ -112,8 +112,6 @@ Contributions are welcome! If you'd like to improve the project, please feel fre
 
 This project is licensed under the MIT License.
 
-```
-
 ### Instructions for Saving the File:
 
 1. **Create a file** named `README.md` in your project root directory.
@@ -121,4 +119,3 @@ This project is licensed under the MIT License.
 3. **Save** the file.
 
 This `README.md` file provides a comprehensive overview of the project, setup instructions for both Windows and Linux/macOS, and instructions on how to automatically start the server and open Swagger UI.
-```
