@@ -1,6 +1,3 @@
-Sure, here is the complete content formatted as a Markdown file for your `README.md`:
-
-````markdown
 # Vehicle Maintenance API Project
 
 This project provides a backend API for managing vehicle maintenance operations, including:
@@ -45,8 +42,8 @@ The APIs are documented using **Swagger UI**, which provides an interactive inte
 
    ```sh
    chmod +x start_server.sh
+
    ```
-````
 
 2. **Run the Script**:
 
