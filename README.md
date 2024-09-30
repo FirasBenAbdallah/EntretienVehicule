@@ -107,3 +107,18 @@ The project uses **Swagger UI** for API documentation. When the server starts, S
 ## Contributing
 
 Contributions are welcome! If you'd like to improve the project, please feel free to fork it and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
+
+```
+
+### Instructions for Saving the File:
+
+1. **Create a file** named `README.md` in your project root directory.
+2. **Copy and paste** the above content into the `README.md` file.
+3. **Save** the file.
+
+This `README.md` file provides a comprehensive overview of the project, setup instructions for both Windows and Linux/macOS, and instructions on how to automatically start the server and open Swagger UI.
+```
