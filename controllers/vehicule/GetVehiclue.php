@@ -9,5 +9,6 @@ if (isset($_GET['VehiculeID'])) {
     $VehiculeID = $_GET['VehiculeID'];
     echo getVehiculeInfo($VehiculeID);
 } else {
+    http_response_code(400);
     echo json_encode(['error' => 'VehiculeID parameter is required']);
 }

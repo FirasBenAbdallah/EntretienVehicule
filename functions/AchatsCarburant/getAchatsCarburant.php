@@ -36,6 +36,7 @@ function getAchatsCarburant($AchatID)
             );
             return json_encode($achat);
         } else {
+            http_response_code(404);
             return json_encode(['error' => 'Fuel purchase not found']);
         }
     } catch (Exception $e) {

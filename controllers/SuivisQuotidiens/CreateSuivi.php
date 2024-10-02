@@ -1,4 +1,5 @@
 <?php
+include '../../config/cors.php';
 include '../../config/db_connect.php';
 include '../../functions/suivisQuotidiens/AddSuivisQuotidiens.php';
 
@@ -14,8 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Upload file for 'Preuve'
     $PreuvePath = null;
     if (isset($_FILES['Preuve']) && $_FILES['Preuve']['error'] == UPLOAD_ERR_OK) {
-        $preuveName = basename($_FILES["Preuve"]["name"]);
-        $PreuvePath = $target_dir . uniqid() . "_" . $preuveName;
+        // Extract the original file extension
+        $fileExtension = pathinfo($_FILES["Preuve"]["name"], PATHINFO_EXTENSION);
+
+        // Create a short and unique file name
+        $shortFileName = uniqid("preuve_", true) . "." . $fileExtension; // Example: preuve_605c7b2a34b9d.jpg
+
+        $PreuvePath = $target_dir . $shortFileName;
 
         // Move the uploaded file to the target directory
         if (!move_uploaded_file($_FILES["Preuve"]["tmp_name"], $PreuvePath)) {
@@ -44,20 +50,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['error' => 'Invalid request method. Please use POST']);
 }
-
-// include '../../config/db_connect.php';
-// include '../../functions/suivisQuotidiens/AddSuivisQuotidiens.php';
-
-// header('Content-Type: application/json');
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-// $data = json_decode(file_get_contents('php://input'), true);
-
-// if (isset($data['VehiculeID'], $data['ChauffeurID'], $data['DateSuivi'], $data['Kilometrage'], $data['VolumeCarburant'], $data['Preuve'])) {
-// echo AddSuivisQuotidiens($data['VehiculeID'], $data['ChauffeurID'], $data['DateSuivi'], $data['Kilometrage'], $data['VolumeCarburant'], $data['Preuve']);
-// } else {
-// echo json_encode(['error' => 'Missing required parameters']);
-// }
-// } else {
-// echo json_encode(['error' => 'Invalid request method']);
-// }

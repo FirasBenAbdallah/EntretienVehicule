@@ -1,4 +1,5 @@
 <?php
+include '../../config/cors.php';
 include '../../config/db_connect.php';
 include '../../models/SuivisQuotidiens.php';
 include '../../functions/suivisQuotidiens/getAllSuivisQuotidiens.php';

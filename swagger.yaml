@@ -5,7 +5,8 @@ info:
   description: "API documentation for managing vehicle maintenance operations, including Suivi Quotidien, Nettoyage, and Fuel Purchases."
 
 servers:
-  - url: "http://localhost:8000"
+  # - url: "http://localhost:8000"
+  - url: "http://192.168.1.14:8000"
 
 paths:
   /controllers/SuivisQuotidiens/CreateSuivi.php:
@@ -62,7 +63,44 @@ paths:
                   error:
                     type: string
                     example: "Missing required parameters"
-
+  /controllers/SuivisQuotidiens/GetAllSuivis.php:
+    get:
+      summary: "Retrieve all Suivis Quotidiens"
+      tags:
+        - "SuivisQuotidiens"
+      responses:
+        "200":
+          description: "A list of all Suivis Quotidiens"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    SuiviID:
+                      type: integer
+                      description: "ID of the suivi"
+                    VehiculeID:
+                      type: integer
+                      description: "ID of the vehicle"
+                    ChauffeurID:
+                      type: integer
+                      description: "ID of the chauffeur"
+                    DateSuivi:
+                      type: string
+                      format: date
+                      description: "Date of the suivi"
+                    Kilometrage:
+                      type: integer
+                      description: "Kilometrage of the vehicle"
+                    VolumeCarburant:
+                      type: number
+                      format: float
+                      description: "Volume of carburant in liters"
+                    Preuve:
+                      type: string
+                      description: "URL of the proof document image"
   /controllers/nettoyages/CreateNettoyage.php:
     post:
       summary: "Create a new Nettoyage"
@@ -115,11 +153,118 @@ paths:
                     type: string
                     example: "Missing required parameters"
 
+  /controllers/vehicule/GetAllVehicules.php:
+    get:
+      summary: "Retrieve all vehicles"
+      tags:
+        - "Vehicules"
+      responses:
+        "200":
+          description: "A list of all vehicles"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    VehiculeID:
+                      type: integer
+                      description: "ID of the vehicle"
+                    Marque:
+                      type: string
+                      description: "Brand of the vehicle"
+                    Modele:
+                      type: string
+                      description: "Model of the vehicle"
+                    Immatriculation:
+                      type: string
+                      description: "License plate number"
+                    DateAchat:
+                      type: string
+                      format: date
+                      description: "Date of purchase"
+                    Kilometrage:
+                      type: integer
+                      description: "Kilometrage of the vehicle"
+                    ChauffeurID:
+                      type: integer
+                      description: "ID of the chauffeur"
+                    DateAffectation:
+                      type: string
+                      format: date
+                      description: "Date of assignment"
+                    DateDesaffectation:
+                      type: string
+                      format: date
+                      description: "Date of unassignment"
+
+  /controllers/vehicule/GetVehiclue.php:
+    get:
+      summary: "Retrieve a specific vehicle"
+      tags:
+        - "Vehicules"
+      parameters:
+        - in: query
+          name: VehiculeID
+          required: true
+          schema:
+            type: integer
+          description: "ID of the vehicle"
+      responses:
+        "200":
+          description: "Vehicle details"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  VehiculeID:
+                    type: integer
+                    description: "ID of the vehicle"
+                  Marque:
+                    type: string
+                    description: "Brand of the vehicle"
+                  Modele:
+                    type: string
+                    description: "Model of the vehicle"
+                  Immatriculation:
+                    type: string
+                    description: "License plate number"
+                  DateAchat:
+                    type: string
+                    format: date
+                    description: "Date of purchase"
+                  Kilometrage:
+                    type: integer
+                    description: "Kilometrage of the vehicle"
+                  ChauffeurID:
+                    type: integer
+                    description: "ID of the chauffeur"
+                  DateAffectation:
+                    type: string
+                    format: date
+                    description: "Date of assignment"
+                  DateDesaffectation:
+                    type: string
+                    format: date
+                    description: "Date of unassignment"
+        "404":
+          description: "Vehicle not found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Vehicle not found"
+
   /controllers/vehicule/DeleteVehicule.php:
     delete:
       summary: "Delete a specific vehicle"
       tags:
-        - "Vehicles"
+        - "Vehicules"
       parameters:
         - in: query
           name: VehiculeID
@@ -196,6 +341,44 @@ paths:
           schema:
             type: integer
           description: "ID of the fuel purchase"
+      responses:
+        "200":
+          description: "Fuel purchase details"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  AchatID:
+                    type: integer
+                    description: "ID of the fuel purchase"
+                  VehiculeID:
+                    type: integer
+                    description: "ID of the vehicle"
+                  ChauffeurID:
+                    type: integer
+                    description: "ID of the chauffeur"
+                  DateAchat:
+                    type: string
+                    format: date
+                    description: "Date of the fuel purchase"
+                  Montant:
+                    type: number
+                    format: float
+                    description: "Amount of the fuel purchase"
+                  Litres:
+                    type: number
+                    format: float
+                    description: "Liters purchased"
+                  Facture:
+                    type: string
+                    description: "URL of the invoice"
+
+  /controllers/achatsCarburant/GetAllAchatsCarburant.php:
+    get:
+      summary: "Retrieve all fuel purchase"
+      tags:
+        - "AchatsCarburant"
       responses:
         "200":
           description: "Fuel purchase details"

@@ -21,9 +21,11 @@ function getVehiculeInfo($VehiculeID)
             );
             return json_encode($vehicule);
         } else {
+            http_response_code(404);
             return json_encode(['error' => 'Vehicle not found']);
         }
     } catch (Exception $e) {
+        http_response_code(500);
         return json_encode(['error' => 'Query failed: ' . $e->getMessage()]);
     }
 }
